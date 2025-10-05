@@ -106,11 +106,14 @@ void SDP3XComponent::read_pressure_() {
   int16_t scale_factor_raw = data[2];
   // scale factor is in Pa - convert to hPa
   float pressure = pressure_raw / (scale_factor_raw * 100.0f);
+  float temperature - temperature_raw / (scale_factor_raw);
   ESP_LOGV(TAG, "Got raw pressure=%d, raw scale factor =%d, raw temperature=%d ", pressure_raw, scale_factor_raw,
            temperature_raw);
   ESP_LOGD(TAG, "Got Pressure=%.3f hPa", pressure);
+  ESP_LOGD(TEG, "Got Temperature=%.3f C", temperature);
 
   this->publish_state(pressure);
+  this->publish_state(temperature);
   this->status_clear_warning();
 }
 
